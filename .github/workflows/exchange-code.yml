@@ -1,0 +1,35 @@
+name: One-time OAuth code exchange
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "OAuth authorization code (single-use)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  exchange:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install cryptography
+      - name: Exchange code for tokens
+        run: python exchange-code.py --code "${{ inputs.code }}"
+        env:
+          SHOPEE_ADS_PARTNER_ID: ${{ secrets.SHOPEE_ADS_PARTNER_ID }}
+          SHOPEE_ADS_PARTNER_KEY: ${{ secrets.SHOPEE_ADS_PARTNER_KEY }}
+          SHOPEE_SHOP_ID: ${{ secrets.SHOPEE_SHOP_ID }}
+          TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
+      - name: Commit encrypted tokens
+        run: |
+          git config user.name "chat-unread-poller"
+          git config user.email "chat-unread-poller@users.noreply.github.com"
+          git add tokens.enc
+          git diff --cached --quiet || (git commit -m "Store encrypted chat tokens" && git push)
