@@ -1,0 +1,33 @@
+name: Chat unread poller
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install cryptography
+      - name: Poll unread conversations
+        run: python poll_unread.py
+        env:
+          SHOPEE_ADS_PARTNER_ID: ${{ secrets.SHOPEE_ADS_PARTNER_ID }}
+          SHOPEE_ADS_PARTNER_KEY: ${{ secrets.SHOPEE_ADS_PARTNER_KEY }}
+          SHOPEE_SHOP_ID: ${{ secrets.SHOPEE_SHOP_ID }}
+          TOKEN_PASSPHRASE: ${{ secrets.TOKEN_PASSPHRASE }}
+      - name: Commit alerts.json and tokens.enc
+        run: |
+          git config user.name "chat-unread-poller"
+          git config user.email "chat-unread-poller@users.noreply.github.com"
+          git add alerts.json tokens.enc
+          git diff --cached --quiet || (git commit -m "Update chat alerts" && git push)
