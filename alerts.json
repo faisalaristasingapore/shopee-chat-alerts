@@ -3,9 +3,15 @@
   {
    "buyer": "",
    "conversation_id": "267898769882784580",
-   "seen_at": 1792497915,
+   "seen_at": 1792498038,
+   "unread_count": 1
+  },
+  {
+   "buyer": "",
+   "conversation_id": "267898770034705660",
+   "seen_at": 1792498038,
    "unread_count": 1
   }
  ],
- "updated_at": 1792497915
+ "updated_at": 1792498038
 }
