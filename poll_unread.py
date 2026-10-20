@@ -106,7 +106,11 @@ def git_commit_push():
     if r.returncode != 0:
         subprocess.run(["git", "commit", "-m", "Update chat alerts"],
                        check=False)
-        subprocess.run(["git", "push"], check=False)
+        try:
+            subprocess.run(["git", "push"], check=False, timeout=90)
+        except subprocess.TimeoutExpired:
+            log("PUSH_TIMEOUT_EXCEEDED")
+            return
         log("PUSHED_UPDATE")
     else:
         log("NO_CHANGES")
