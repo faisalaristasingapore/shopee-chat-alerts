@@ -2,10 +2,28 @@
  "alerts": [
   {
    "buyer": "",
-   "conversation_id": "68585722926843011",
-   "seen_at": 1794800549,
+   "conversation_id": "267898769899918038",
+   "seen_at": 1794826874,
+   "unread_count": 3
+  },
+  {
+   "buyer": "",
+   "conversation_id": "267898769873462765",
+   "seen_at": 1794826874,
    "unread_count": 1
+  },
+  {
+   "buyer": "",
+   "conversation_id": "267898769970577184",
+   "seen_at": 1794826874,
+   "unread_count": 2
+  },
+  {
+   "buyer": "",
+   "conversation_id": "267898770282833759",
+   "seen_at": 1794826874,
+   "unread_count": 4
   }
  ],
- "updated_at": 1794800549
+ "updated_at": 1794826874
 }
