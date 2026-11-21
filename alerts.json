@@ -2,16 +2,10 @@
  "alerts": [
   {
    "buyer": "",
-   "conversation_id": "267898770784865128",
-   "seen_at": 1795227534,
-   "unread_count": 1
-  },
-  {
-   "buyer": "",
    "conversation_id": "267898769922467823",
-   "seen_at": 1795227534,
+   "seen_at": 1795227656,
    "unread_count": 1
   }
  ],
- "updated_at": 1795227534
+ "updated_at": 1795227656
 }
